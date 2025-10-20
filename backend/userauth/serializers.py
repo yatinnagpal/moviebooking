@@ -5,7 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 User = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required = True, Validators = [validate_password])
+    password = serializers.CharField(write_only=True, required = True, validators = [validate_password])
     password2 = serializers.CharField(write_only=True, required = True)
 
     class Meta:
@@ -13,7 +13,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         fields = ('username','email','phone_number','password','password2')
 
     def validate(self, data):
-        if data['password']! = data['password2']:
+        if data['password'] != data['password2']:
             raise serializers.ValidationError({"password": "Password must match."})
         return data
     
@@ -30,3 +30,15 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField(required = True)
     password = serializers.CharField(required = True, write_only = True)
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+class ResetPasswordSerializer(serializers.Serializer):
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
+
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError({"password": "Passwords must match."})
+        return data
