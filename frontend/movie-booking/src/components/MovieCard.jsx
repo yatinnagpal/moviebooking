@@ -2,9 +2,11 @@ import React from 'react'
 import {CardMedia, Typography, CardActions, Button, Box} from '@mui/material'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { useNavigate } from 'react-router-dom'
 
 
-export default function MovieCard({movie}){
+export default function MovieCard({movie, onView, onShowtimes}){
+      const navigate = useNavigate()
       const poster = movie.poster_url || 'https://via.placeholder.com/400x600?text=No+Image'
       
       return (
@@ -28,8 +30,8 @@ export default function MovieCard({movie}){
         </Typography>
       </CardContent>
           <CardActions>
-            <Button size='small'>View</Button>
-            <Button size='small'>Showtimes</Button>
+            <Button size='small' onClick={onView}>View</Button>
+            <Button size='small' onClick={onShowtimes}>Showtimes</Button>
           </CardActions>
         </Card>
       )
