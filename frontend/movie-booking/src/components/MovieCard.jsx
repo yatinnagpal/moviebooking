@@ -1,15 +1,18 @@
 import React from 'react'
-import {Card, CardMedia, CardContent, Typography, CardActions, Button, Box} from '@mui/material'
+import {CardMedia, Typography, CardActions, Button, Box} from '@mui/material'
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+
 
 export default function MovieCard({movie}){
       const poster = movie.poster_url || 'https://via.placeholder.com/400x600?text=No+Image'
       
       return (
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 3 }}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 3, maxWidth: 345 }}>
           <CardMedia
           component={'img'}
           height="220"
-          sx={{ objectFit: 'cover' }}
+             sx={{ objectFit: 'contain' }}
           image={poster}
           alt={movie.title}
           />

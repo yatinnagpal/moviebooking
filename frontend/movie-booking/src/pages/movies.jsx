@@ -44,7 +44,7 @@ const filtered = movies.filter(m =>
     <Box sx={{
       display: 'flex',
       gap:2, mb:3, alignItems: 'center', flexWrap: 'wrap'}}>
-        <Typography variant='h5' sx={{minWidth:200}}>Movies</Typography>
+        <Typography variant='h5' sx={{minWidth:200}}>VookMyShow</Typography>
         <TextField
             value={search}
           onChange={e => setSearch(e.target.value)}
@@ -76,7 +76,7 @@ const filtered = movies.filter(m =>
      ) : (
         <Grid container spacing={2}>
           {filtered.map(movie => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
+            <Grid item xs={12} ml={4} sm={6} md={4} lg={3} key={movie.id}>
                 <MovieCard movie={movie} />
             </Grid>
             ))}
