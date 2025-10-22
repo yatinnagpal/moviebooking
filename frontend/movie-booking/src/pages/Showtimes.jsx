@@ -9,7 +9,7 @@ export default function Showtimes() {
   const navigate = useNavigate()
   const [showtimes, setShowtimes] = useState()
   const [loading, setLoading] = useState(true)
-  const [movieTitle, setMovieTitle] = useState('')
+  const [movieTitle, setMovieTitle] = useState()
 
   useEffect(()=>{
     let mounted=true;
