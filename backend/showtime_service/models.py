@@ -72,18 +72,3 @@ class ShowTime(models.Model):
         self._ensure_seats_default()
         self.full_clean()
         super().save(*args, **kwargs)
-
-
-            
-
-
-
-
-    
-
-    
-
-
-    
-
-# Create your models here.
