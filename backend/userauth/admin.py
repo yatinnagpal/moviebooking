@@ -3,13 +3,9 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User, PasswordResetToken
 
 class UserAdmin(BaseUserAdmin):
-    # Fields to display in the admin list view
     list_display = ('username', 'email', 'phone_number', 'is_staff', 'is_active', 'created_at', 'updated_at')
-    # Fields to filter by in the admin interface
     list_filter = ('is_staff', 'is_active', 'created_at')
-    # Fields to search in the admin interface
     search_fields = ('username', 'email', 'phone_number')
-    # Fields to display in the admin detail view
     fieldsets = (
         (None, {'fields': ('username', 'email', 'phone_number')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
@@ -35,17 +31,11 @@ class UserAdmin(BaseUserAdmin):
         return readonly
 
 class PasswordResetTokenAdmin(admin.ModelAdmin):
-    # Fields to display in the admin list view
     list_display = ('user', 'token', 'created_at', 'expires_at', 'is_valid')
-    # Fields to filter by
     list_filter = ('created_at', 'expires_at')
-    # Fields to search
     search_fields = ('user__username', 'user__email', 'token')
-    # Fields to display in the detail view
     fields = ('user', 'token', 'created_at', 'expires_at')
-    # Make fields read-only
     readonly_fields = ('created_at', 'expires_at', 'token')
-    # Order by creation date (newest first)
     ordering = ('-created_at',)
 
     def is_valid(self, obj):
