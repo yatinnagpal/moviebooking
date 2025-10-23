@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'movie_service',
+    'showtime_service',
     'userauth',
 ]
 
@@ -123,11 +124,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
 USE_I18N = True
 
 USE_TZ = True
+
+TIME_ZONE = 'Asia/Kolkata'
+
 
 
 # Static files (CSS, JavaScript, Images)
