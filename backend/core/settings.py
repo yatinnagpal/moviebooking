@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'movie_service',
-    'showtime_service'
+    'showtime_service',
+    'booking_service'
 ]
 
 MIDDLEWARE = [
