@@ -29,7 +29,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} /> 
+        <Route path="/reset-password/:uidb64/:token" element={<ResetPassword />} />
         <Route path="/showtimes/:showtimeId/seats" element={<SeatSelection />} />
         {/* <Route path="/" element={<h1>Welcome to Movie Ticket Booking App</h1>} /> */}
       </Routes>
