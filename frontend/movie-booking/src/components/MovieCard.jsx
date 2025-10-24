@@ -23,8 +23,8 @@ export default function MovieCard({movie, onView, onShowtimes}){
       >
           <CardMedia
           component={'img'}
-          height="220"
-             sx={{ objectFit: 'contain' }}
+          height="120px"
+          sx={{ objectFit: 'cover', borderRadius: 1 }}
           image={poster}
           alt={movie.title}
           />

@@ -55,43 +55,26 @@ export default function SeatSelection() {
   console.log('seats', seats);
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h5" gutterBottom>Select Your Seats</Typography>
-
-      <Box sx={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(10, 1fr)', 
-        gap: 1, 
-        mt: 2 
-      }}>
-        {seats.map(seat => (
-          <Button
-            key={seat.id}
-            variant="contained"
-            sx={{
-              backgroundColor: seat.is_booked
-                ? 'red'
-                : selected.includes(seat.id)
-                  ? 'green'
-                  : 'grey',
-            }}
-            disabled={seat.is_booked}
-            onClick={() => toggleSeat(seat.id)}
-          >
-            {seat.seat_number}
-          </Button>
-        ))}
-      </Box>
-
-      {selected.length > 0 && (
-        <Button 
-          onClick={confirmBooking} 
-          variant="contained" 
-          sx={{ mt: 3 }}
-        >
-          Confirm Booking ({selected.length} seats)
-        </Button>
-      )}
-    </Box>
+<Box sx={{ display:'grid', gridTemplateColumns:`repeat(10, 40px)`, gap:1 }}>
+  {seats.map(seat => (
+    <Button
+      key={seat.id}
+      variant="contained"
+      sx={{
+        width: 40,
+        height: 40,
+        backgroundColor: seat.is_booked
+          ? 'red'
+          : selected.includes(seat.id)
+            ? 'green'
+            : 'grey',
+      }}
+      disabled={seat.is_booked}
+      onClick={() => toggleSeat(seat.id)}
+    >
+      {seat.seat_number}
+    </Button>
+  ))}
+</Box>
   );
 }

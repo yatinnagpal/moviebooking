@@ -9,8 +9,17 @@ class SeatAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'movie_title', 'show_start_time', 'status', 'seats_booked', 'user_name', 'booked_at')
-    list_filter = ('status',)
+    list_display = [
+        'id',
+        'user_name',
+        'user_email',
+        'seats_booked',
+        'status',
+        'created_at',
+        'showtime',
+    ]
+    list_filter = ['status', 'showtime']
+    search_fields = ['user_name', 'user_email']
 
     def movie_title(self, obj):
         return obj.showtime.movie.title if obj.showtime and obj.showtime.movie else "-"
