@@ -10,7 +10,17 @@ export default function MovieCard({movie, onView, onShowtimes}){
       const poster = movie.poster_url || 'https://via.placeholder.com/400x600?text=No+Image'
       
       return (
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 2, boxShadow: 3, maxWidth: 345 }}>
+      <Card
+        sx={{
+          height: '100%', // 👈 full height in grid cell
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between', // 👈 keeps buttons at bottom
+          borderRadius: 2,
+          boxShadow: 3,
+          maxWidth: 345,
+        }}
+      >
           <CardMedia
           component={'img'}
           height="220"

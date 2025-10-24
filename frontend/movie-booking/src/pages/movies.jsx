@@ -94,39 +94,96 @@ const handleCloseModal = () => setSelectedMovie(null);
         </Grid>
      )
     }
-     {/* Modal Overlay */}
-      {selectedMovie && (
-        <Box
-          onClick={handleCloseModal}
-          sx={{
-            position: 'fixed',
-            top:0, left:0, width:'100%', height:'100%',
-            bgcolor:'rgba(0,0,0,0.5)',
-            backdropFilter:'blur(4px)',
-            display:'flex', alignItems:'center', justifyContent:'center',
-            zIndex: 1000
-          }}
+{selectedMovie && (
+  <Box
+    onClick={handleCloseModal}
+    sx={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      bgcolor: 'rgba(0,0,0,0.5)',
+      backdropFilter: 'blur(4px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 1000,
+    }}
+  >
+    <Card
+      onClick={(e) => e.stopPropagation()}
+      sx={{
+        width: { xs: '90%', sm: 480 },
+        maxHeight: '85vh', // 👈 modal won’t exceed viewport height
+        overflowY: 'auto',
+        borderRadius: 2,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* ✅ FIX: controlled image height */}
+      <CardMedia
+        component="img"
+        image={selectedMovie.poster_url}
+        alt={selectedMovie.title}
+        sx={{
+          height: 300, // 👈 fixed image height (responsive enough)
+          objectFit: 'contain', // 👈 cropped nicely
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
+        }}
+      />
+
+      <CardContent sx={{ flexGrow: 1, p: 2 }}>
+        <Typography variant="h5" gutterBottom>
+          {selectedMovie.title}
+        </Typography>
+        <Typography variant="body2" sx={{ mb: 1 }}>
+          {selectedMovie.description}
+        </Typography>
+        <Typography variant="caption" sx={{ display: 'block', mb: 1 }}>
+          Genre: {selectedMovie.genre}
+        </Typography>
+        <Typography variant="caption" sx={{ display: 'block', mb: 1 }}>
+          Duration: {selectedMovie.duration} mins
+        </Typography>
+        <Typography variant="caption" sx={{ display: 'block', mb: 1 }}>
+          Rating: {selectedMovie.rating} ⭐
+        </Typography>
+      </CardContent>
+
+      {/* ✅ Button stays visible */}
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2, pt: 0 }}>
+        <Button
+          variant="contained"
+          onClick={() => handleShowtimes(selectedMovie)}
         >
-          <Card onClick={(e)=>e.stopPropagation()} sx={{ width:{xs:'90%', sm:500}, p:2, borderRadius:2 }}>
-            <CardMedia
-              component="img"
-              height="300"
-              image={selectedMovie.poster_url}
-              alt={selectedMovie.title}
-              sx={{ objectFit:'contain', borderRadius:1 }}
-            />
-            <CardContent>
-              <Typography variant="h5" gutterBottom>{selectedMovie.title}</Typography>
-              <Typography variant="body2" sx={{mb:1}}>{selectedMovie.description}</Typography>
-              <Typography variant="caption" sx={{display:'block', mb:1}}>Genre: {selectedMovie.genre}</Typography>
-              <Typography variant="caption" sx={{display:'block', mb:1}}>Duration: {selectedMovie.duration} mins</Typography>
-              <Typography variant="caption" sx={{display:'block', mb:1}}>Rating: {selectedMovie.rating} ⭐</Typography>
-              <Button variant="contained" sx={{mt:2}} onClick={() => handleShowtimes(selectedMovie)}>View Showtimes</Button>
-            </CardContent>
-            <Button sx={{position:'absolute', top:8, right:8}} onClick={handleCloseModal}>X</Button>
-          </Card>
-        </Box>
-      )}
+          View Showtimes
+        </Button>
+      </Box>
+
+      {/* ✅ Close button fixed */}
+      <Button
+        onClick={handleCloseModal}
+        sx={{
+          position: 'absolute',
+          top: 8,
+          right: 8,
+          minWidth: '30px',
+          height: '30px',
+          borderRadius: '50%',
+          backgroundColor: '#eee',
+          '&:hover': { backgroundColor: '#ddd' },
+        }}
+      >
+        ✕
+      </Button>
+    </Card>
+  </Box>
+)}
+
     </Box>
   )
 }

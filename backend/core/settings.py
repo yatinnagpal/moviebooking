@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'movie_service',
     'showtime_service',
     'userauth',
+    'booking_service',
 ]
 
 MIDDLEWARE = [

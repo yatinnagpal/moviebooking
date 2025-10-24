@@ -31,9 +31,10 @@ export default function Showtimes() {
     return () => mounted=false;
   },[id])
 
-  const handleBook = (showtimeId) => {
-    console.log('Book showtime', showtimeId)
-  }
+const handleBook = (showtimeId) => {
+  navigate(`/showtimes/${showtimeId}/seats`);
+};
+
 
   return (
     <Box sx= {{p:2}}>
@@ -58,7 +59,10 @@ export default function Showtimes() {
                   <Typography variant="body2">Price: Rs{st.price_per_ticket}</Typography>
                   </CardContent>
                   <CardActions>
-                    <Button variant="contained" fullWidth getClick={()=> handleBook(st.id)}>Book Now</Button>
+                    <Button variant="contained" fullWidth onClick={() => handleBook(st.id)}>
+  Book Now
+</Button>
+
                   </CardActions>
               </Card>
             </Grid>
