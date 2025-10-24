@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import MovieDashboard from './MovieDashboard';
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function AdminDashboard() {
       <Button variant="contained" color="primary" onClick={() => navigate('/')}>
         Go to User Homepage
       </Button>
+      <MovieDashboard />
     </Box>
   );
 }
