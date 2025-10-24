@@ -5,6 +5,7 @@ import MovieDetail from './pages/MovieDetail'
 import Showtimes from './pages/Showtimes'
 import AdminDashboard from './pages/AdminDashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -20,7 +21,9 @@ function App() {
       {!isAuthPage && <Navbar />}  {/* Hide navbar on login/register pages */}
       <Routes>
         <Route path="/" element={<Movies />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+        {/* Protect the admin dashboard route */}
+        <Route path="/admin" element={ <ProtectedAdminRoute> <AdminDashboard /> </ProtectedAdminRoute> } />
         <Route path="/movies/:id" element={<MovieDetail />} />
         <Route path="/movies/:id/showtimes" element={<Showtimes />} />
         <Route path="/register" element={<Register />} />

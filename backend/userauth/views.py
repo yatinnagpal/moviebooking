@@ -102,21 +102,26 @@ class ForgotPasswordView(APIView):
         serializer = ForgotPasswordSerializer(data=request.data)
         if serializer.is_valid():
             email = serializer.validated_data['email']
-            try:
-                user = User.objects.get(email=email)
-                token = str(uuid.uuid4())
-                PasswordResetToken.objects.create(user=user, token=token)
-                reset_link = f"http://localhost:3000/reset-password/{token}"
-                send_mail(
-                    subject='Password Reset Request',
-                    message=f'Click the link to reset your password: {reset_link}',
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=[email],
-                    fail_silently=False,
-                )
-                return Response({'message': 'Password reset link sent to your email.'}, status=status.HTTP_200_OK)
-            except User.DoesNotExist:
-                return Response({'error': 'Email not found.'}, status=status.HTTP_404_NOT_FOUND)
+            user = User.objects.get(email=email)
+
+            # Generate password reset token
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+            # Create reset link (frontend should handle this route)
+            reset_link = f"http://localhost:3000/reset-password/{uid}/{token}/"
+
+            # Send email
+            send_mail(
+                subject="Password Reset Request",
+                message=f"Click the link to reset your password: {reset_link}",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+                fail_silently=False
+            )
+
+            return Response({"message": "Password reset link sent to your email."}, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ResetPasswordView(APIView):
