@@ -3,7 +3,9 @@ import './App.css';
 import Movies from './pages/movies';
 import MovieDetail from './pages/MovieDetail'
 import Showtimes from './pages/Showtimes'
+import AdminDashboard from './pages/AdminDashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
@@ -12,10 +14,13 @@ import SeatSelection from './pages/SeatSelection';
 
 
 function App() {
+  const isAuthPage = window.location.pathname === '/login' || window.location.pathname === '/register';
   return (
     <Router>
+      {!isAuthPage && <Navbar />}  {/* Hide navbar on login/register pages */}
       <Routes>
         <Route path="/" element={<Movies />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/movies/:id" element={<MovieDetail />} />
         <Route path="/movies/:id/showtimes" element={<Showtimes />} />
         <Route path="/register" element={<Register />} />

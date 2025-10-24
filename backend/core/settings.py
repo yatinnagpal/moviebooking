@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'showtime_service',
     'userauth',
     'booking_service',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -152,13 +153,15 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'chinmaypatil15@gmail.com'
-# EMAIL_HOST_PASSWORD = 'your-app-password'  # Use an App Password for Gmail
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'chinmaypatil15@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'cgco kbja gral eums'  # Your email password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_FAIL_SILENTLY = False
