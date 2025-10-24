@@ -45,6 +45,11 @@ class UserLoginSerializer(serializers.Serializer):
 class ForgotPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 
+    def validate_email(self, value):
+        if not User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("No user found with this email.")
+        return value
+
 class ResetPasswordSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
