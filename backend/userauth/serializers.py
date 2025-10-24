@@ -51,10 +51,10 @@ class ForgotPasswordSerializer(serializers.Serializer):
         return value
 
 class ResetPasswordSerializer(serializers.Serializer):
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    password2 = serializers.CharField(write_only=True, required=True)
+    password = serializers.CharField(write_only=True, min_length=6)
+    confirm_password = serializers.CharField(write_only=True)
 
     def validate(self, data):
-        if data['password'] != data['password2']:
-            raise serializers.ValidationError({"password": "Passwords must match."})
+        if data['password'] != data['confirm_password']:
+            raise serializers.ValidationError("Passwords do not match.")
         return data

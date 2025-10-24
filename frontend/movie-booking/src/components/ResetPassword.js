@@ -7,9 +7,11 @@ import api from '../utils/api';
 function ResetPassword() {
   const [formData, setFormData] = useState({
     password: '',
-    password2: '',
+    confirm_password: '',
   });
-  const { token } = useParams();
+
+  // ✅ Capture both uidb64 and token from URL
+  const { uidb64, token } = useParams();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,9 +20,20 @@ function ResetPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.password !== formData.confirm_password) {
+      toast.error("Passwords do not match.");
+      return;
+    }
+
     try {
-      const response = await api.post(`/reset-password/${token}/`, formData);
-      toast.success(response.data.message);
+      // ✅ Include both uidb64 and token in API endpoint
+      const response = await api.post(
+        `/reset-password/${uidb64}/${token}/`,
+        formData
+      );
+
+      toast.success(response.data.message || 'Password reset successfully.');
       navigate('/login');
     } catch (error) {
       toast.error(error.response?.data?.error || 'Failed to reset password.');
@@ -46,9 +59,9 @@ function ResetPassword() {
           />
           <TextField
             label="Confirm Password"
-            name="password2"
+            name="confirm_password"
             type="password"
-            value={formData.password2}
+            value={formData.confirm_password}
             onChange={handleChange}
             fullWidth
             margin="normal"

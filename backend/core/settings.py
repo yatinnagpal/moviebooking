@@ -156,12 +156,16 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'chinmaypatil15@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'cgco kbja gral eums'  # Your email password
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_FAIL_SILENTLY = False
+DEFAULT_FROM_EMAIL = 'no-reply@nrikart.com'
+
+# Email Configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'chinmaypatil15@gmail.com'  # Your email address
+# EMAIL_HOST_PASSWORD = 'usrh naqp djwh plcc'  # Your email password
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL_FAIL_SILENTLY = False
