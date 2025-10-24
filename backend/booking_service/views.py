@@ -4,23 +4,18 @@ from .models import Booking, Seat
 from .serializers import BookingSerializer, SeatSerializer
 from django.utils import timezone
 from django.shortcuts import render
+from showtime_service.models import ShowTime
 
-# Create your views here.
 
 class SeatsViewSet(viewsets.ModelViewSet):
-    queryset = Seat.objects.all()
     serializer_class = SeatSerializer
 
-    def lock_seat(self, request, pk=None):
-        seat = self.get_object()
-        if seat.is_booked:
-            return Response({'error': 'Seat is already booked'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        seat.is_locked = True
-        seat.locked_at = timezone.now()
-        seat.save()
-
-        return Response(SeatSerializer(seat).data)
+    def get_queryset(self):
+        queryset = Seat.objects.all()
+        showtime_id = self.request.query_params.get('showtime')
+        if showtime_id:
+            queryset = queryset.filter(showtime_id=showtime_id)
+        return queryset
 
 
 class BookingViewSet(viewsets.ModelViewSet):
@@ -28,30 +23,37 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
 
     def create(self, request, *args, **kwargs):
+        print('request.data', request.data)
         showtime_id = request.data.get('showtime')
-        seat_ids = request.data.get('seat_ids', [])
+        seats_to_book = request.data.get('seats_booked')
         user_name = request.data.get('user_name')
         user_email = request.data.get('user_email')
 
-        seats = Seat.objects.filter(id__in=seat_ids, is_booked=False)
-        if not seats.exists():
-            return Response({'error': 'No valid seats available'}, status=status.HTTP_400_BAD_REQUEST)
+        # Convert to integer safely
+        try:
+            seats_to_book = int(seats_to_book)
+        except (TypeError, ValueError):
+            return Response({"error": "Invalid number of seats"}, status=400)
+
+        if seats_to_book <= 0:
+            return Response({"error": "Number of seats must be > 0"}, status=400)
+
+        try:    
+            showtime = ShowTime.objects.get(id=showtime_id)
+        except ShowTime.DoesNotExist:
+            return Response({"error": "Showtime not found"}, status=status.HTTP_404_NOT_FOUND)
         
-        for seat in seats:
-            seat.is_booked = True
-            seat.is_locked = False
-            seat.locked_at = timezone.now()
-            seat.save()
+        if seats_to_book > showtime.seats_available:
+            return Response({"error": "Not enough seats available"}, status=400)
 
         booking = Booking.objects.create(
-            showtime_id=showtime_id,
+            showtime=showtime,
             user_name=user_name,
             user_email=user_email,
+            seats_booked=seats_to_book,
             status='confirmed'
         )
-        booking.seats.set(seats)
-        booking.save()
+        showtime.seats_available -= seats_to_book
+        showtime.save(update_fields=['seats_available'])
 
         return Response(BookingSerializer(booking).data, status=status.HTTP_201_CREATED)
-
-

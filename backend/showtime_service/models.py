@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from datetime import timedelta
 from movie_service.models import Movie
+from booking_service.models import Seat
 
 
 BUFFER_MINUTES = 15
@@ -72,3 +73,18 @@ class ShowTime(models.Model):
         self._ensure_seats_default()
         self.full_clean()
         super().save(*args, **kwargs)
+        rows = ['A', 'B', 'C', 'D', 'E']
+        for i, row in enumerate(rows):
+            for col in range(1,11):
+                if i*10 + col > self.seats_total:
+                    break
+                Seat.objects.create(
+                    showtime=self,
+                    seat_number=f"{row}{col}",
+                    row=row,
+                    column=col
+                )
+
+
+
+

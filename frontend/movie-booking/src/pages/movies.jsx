@@ -81,9 +81,9 @@ const handleCloseModal = () => setSelectedMovie(null);
      filtered.length === 0 ? (
       <Typography>No movies found</Typography>
      ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent='center' alignItems='stretch'>
           {filtered.map(movie => (
-            <Grid item xs={12} ml={4} sm={6} md={4} lg={3} key={movie.id}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
               <MovieCard 
                 movie={movie} 
                 onView={() => handleView(movie)} 

@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from showtime_service.models import ShowTime
-from showtime_service.seriallizers import ShowtimeSerializer
+from showtime_service.serializers import ShowtimeSerializer
 
 class ShowtimeViewSet(viewsets.ModelViewSet):
     serializer_class = ShowtimeSerializer
