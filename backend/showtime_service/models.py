@@ -3,7 +3,6 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from datetime import timedelta
 from movie_service.models import Movie
-from booking_service.models import Seat
 
 
 BUFFER_MINUTES = 15

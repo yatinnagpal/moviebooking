@@ -1,10 +1,5 @@
 from django.contrib import admin
-from .models import Booking, Seat
-
-@admin.register(Seat)
-class SeatAdmin(admin.ModelAdmin):
-    list_display = ('id', 'showtime', 'seat_number', 'is_booked', 'is_locked')
-    list_filter = ('is_booked', 'is_locked', 'showtime')
+from .models import Booking
 
 
 @admin.register(Booking)
