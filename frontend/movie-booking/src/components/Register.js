@@ -142,7 +142,9 @@ function Register() {
     }
 
     if (!validatePasswordStrength(formData.password)) {
-      toast.error('Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.');
+      toast.error(
+        'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.'
+      );
       return;
     }
 
@@ -178,13 +180,57 @@ function Register() {
           Register
         </Typography>
         <form onSubmit={handleSubmit}>
-          <TextField label="Username" name="username" value={formData.username} onChange={handleChange} fullWidth margin="normal" required />
-          <TextField label="Email" name="email" type="email" value={formData.email} onChange={handleChange} fullWidth margin="normal" required />
-          <TextField label="Phone Number" name="phone_number" value={formData.phone_number} onChange={handleChange} fullWidth margin="normal" />
-          <TextField label="Password" name="password" type="password" value={formData.password} onChange={handleChange} fullWidth margin="normal" required />
-          <TextField label="Confirm Password" name="password2" type="password" value={formData.password2} onChange={handleChange} fullWidth margin="normal" required />
+          <TextField
+            label="Username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required
+          />
+          <TextField
+            label="Email"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required
+          />
+          <TextField
+            label="Phone Number"
+            name="phone_number"
+            value={formData.phone_number}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Password"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required
+          />
+          <TextField
+            label="Confirm Password"
+            name="password2"
+            type="password"
+            value={formData.password2}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required
+          />
           <FormControlLabel
-            control={<Switch checked={isAdmin} onChange={() => setIsAdmin(!isAdmin)} color="primary" />}
+            control={
+              <Switch checked={isAdmin} onChange={() => setIsAdmin(!isAdmin)} color="primary" />
+            }
             label="Register as Admin"
           />
           <Button type="submit" variant="contained" color="primary" fullWidth className="mt-4">

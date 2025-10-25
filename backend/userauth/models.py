@@ -1,18 +1,19 @@
+from datetime import timedelta
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
-from datetime import timedelta
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique = True)
+    email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'user'
+        db_table = "user"
 
     def __str__(self):
         return self.username
@@ -33,7 +34,7 @@ class PasswordResetToken(models.Model):
         return timezone.now() <= self.expires_at
 
     class Meta:
-        db_table = 'password_reset_token'
+        db_table = "password_reset_token"
 
     def __str__(self):
         return f"Token for {self.user.username}"

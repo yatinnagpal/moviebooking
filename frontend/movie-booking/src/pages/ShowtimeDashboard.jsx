@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -19,13 +19,13 @@ import {
   DialogActions,
   Snackbar,
   Alert,
-} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useParams, useNavigate } from "react-router-dom";
-import API from "../api";
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useParams, useNavigate } from 'react-router-dom';
+import API from '../api';
 
 export default function ShowtimeDashboard() {
   const { movieId } = useParams();
@@ -39,16 +39,16 @@ export default function ShowtimeDashboard() {
   const [createOpen, setCreateOpen] = useState(false);
   const [snackbar, setSnackbar] = useState({
     open: false,
-    message: "",
-    severity: "success",
+    message: '',
+    severity: 'success',
   });
 
   const [newShowtime, setNewShowtime] = useState({
-    hall_name: "",
-    start_time: "",
-    seats_total: "",
-    seats_available: "",
-    price_per_ticket: "",
+    hall_name: '',
+    start_time: '',
+    seats_total: '',
+    seats_available: '',
+    price_per_ticket: '',
   });
 
   // ✅ Fetch showtimes
@@ -57,11 +57,11 @@ export default function ShowtimeDashboard() {
       const res = await API.get(`/showtimes/?movie_id=${movieId}`);
       setShowtimes(res.data);
     } catch (error) {
-      console.error("Error fetching showtimes:", error);
+      console.error('Error fetching showtimes:', error);
       setSnackbar({
         open: true,
-        message: "Failed to fetch showtimes.",
-        severity: "error",
+        message: 'Failed to fetch showtimes.',
+        severity: 'error',
       });
     } finally {
       setLoading(false);
@@ -74,21 +74,21 @@ export default function ShowtimeDashboard() {
 
   // ✅ Delete showtime
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this showtime?")) {
+    if (window.confirm('Are you sure you want to delete this showtime?')) {
       try {
         await API.delete(`/showtimes/${id}/`);
         setShowtimes(showtimes.filter((s) => s.id !== id));
         setSnackbar({
           open: true,
-          message: "Showtime deleted successfully.",
-          severity: "success",
+          message: 'Showtime deleted successfully.',
+          severity: 'success',
         });
       } catch (error) {
-        console.error("Error deleting showtime:", error);
+        console.error('Error deleting showtime:', error);
         setSnackbar({
           open: true,
-          message: "Failed to delete showtime.",
-          severity: "error",
+          message: 'Failed to delete showtime.',
+          severity: 'error',
         });
       }
     }
@@ -104,20 +104,17 @@ export default function ShowtimeDashboard() {
   const handleEditSubmit = async () => {
     try {
       await API.put(`/showtimes/${editData.id}/`, editData);
-      setShowtimes(
-        showtimes.map((s) => (s.id === editData.id ? editData : s))
-      );
+      setShowtimes(showtimes.map((s) => (s.id === editData.id ? editData : s)));
       setSnackbar({
         open: true,
-        message: "Showtime updated successfully!",
-        severity: "success",
+        message: 'Showtime updated successfully!',
+        severity: 'success',
       });
       handleEditClose();
     } catch (error) {
-      console.error("Error updating showtime:", error);
-      const msg =
-        error.response?.data?.__all__?.[0] || "Error updating showtime.";
-      setSnackbar({ open: true, message: msg, severity: "error" });
+      console.error('Error updating showtime:', error);
+      const msg = error.response?.data?.__all__?.[0] || 'Error updating showtime.';
+      setSnackbar({ open: true, message: msg, severity: 'error' });
     }
   };
 
@@ -135,23 +132,22 @@ export default function ShowtimeDashboard() {
       setShowtimes([...showtimes, res.data]);
       setSnackbar({
         open: true,
-        message: "Showtime created successfully!",
-        severity: "success",
+        message: 'Showtime created successfully!',
+        severity: 'success',
       });
       setCreateOpen(false); // ✅ Close on success
       setNewShowtime({
-        hall_name: "",
-        start_time: "",
-        seats_total: "",
-        seats_available: "",
-        price_per_ticket: "",
+        hall_name: '',
+        start_time: '',
+        seats_total: '',
+        seats_available: '',
+        price_per_ticket: '',
       });
     } catch (error) {
-      console.error("Error creating showtime:", error);
+      console.error('Error creating showtime:', error);
       const msg =
-        error.response?.data?.__all__?.[0] ||
-        "Error creating showtime. Please try again.";
-      setSnackbar({ open: true, message: msg, severity: "error" });
+        error.response?.data?.__all__?.[0] || 'Error creating showtime. Please try again.';
+      setSnackbar({ open: true, message: msg, severity: 'error' });
       // ❌ Don’t close on error
     }
   };
@@ -159,9 +155,9 @@ export default function ShowtimeDashboard() {
   // ✅ Helper for formatting date/time
   const formatDateTime = (datetime) => {
     const d = new Date(datetime);
-    return d.toLocaleString("en-IN", {
-      dateStyle: "medium",
-      timeStyle: "short",
+    return d.toLocaleString('en-IN', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
     });
   };
 
@@ -176,30 +172,19 @@ export default function ShowtimeDashboard() {
     );
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden", mt: 4, p: 2 }}>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 2 }}
-      >
+    <Paper sx={{ width: '100%', overflow: 'hidden', mt: 4, p: 2 }}>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
         <Stack direction="row" alignItems="center" spacing={2}>
           <Button
             variant="outlined"
             startIcon={<ArrowBackIcon />}
-            onClick={() => navigate("/admin")}
+            onClick={() => navigate('/admin')}
           >
             Back to Movies
           </Button>
-          <Typography variant="h5">
-            🎟️ Showtimes for Movie ID: {movieId}
-          </Typography>
+          <Typography variant="h5">🎟️ Showtimes for Movie ID: {movieId}</Typography>
         </Stack>
-        <Button
-          variant="contained"
-          startIcon={<AddCircleIcon />}
-          onClick={handleCreateOpen}
-        >
+        <Button variant="contained" startIcon={<AddCircleIcon />} onClick={handleCreateOpen}>
           Add Showtime
         </Button>
       </Stack>
@@ -226,40 +211,38 @@ export default function ShowtimeDashboard() {
                 </TableCell>
               </TableRow>
             ) : (
-              showtimes
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((s) => (
-                  <TableRow key={s.id} hover>
-                    <TableCell>{s.id}</TableCell>
-                    <TableCell>{s.hall_name}</TableCell>
-                    <TableCell>{formatDateTime(s.start_time)}</TableCell>
-                    <TableCell>{s.seats_total}</TableCell>
-                    <TableCell>{s.seats_available}</TableCell>
-                    <TableCell>{s.price_per_ticket}</TableCell>
-                    <TableCell align="center">
-                      <Stack direction="row" spacing={1} justifyContent="center">
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          color="primary"
-                          startIcon={<EditIcon />}
-                          onClick={() => handleEditOpen(s)}
-                        >
-                          Update
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          color="error"
-                          startIcon={<DeleteIcon />}
-                          onClick={() => handleDelete(s.id)}
-                        >
-                          Delete
-                        </Button>
-                      </Stack>
-                    </TableCell>
-                  </TableRow>
-                ))
+              showtimes.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((s) => (
+                <TableRow key={s.id} hover>
+                  <TableCell>{s.id}</TableCell>
+                  <TableCell>{s.hall_name}</TableCell>
+                  <TableCell>{formatDateTime(s.start_time)}</TableCell>
+                  <TableCell>{s.seats_total}</TableCell>
+                  <TableCell>{s.seats_available}</TableCell>
+                  <TableCell>{s.price_per_ticket}</TableCell>
+                  <TableCell align="center">
+                    <Stack direction="row" spacing={1} justifyContent="center">
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        color="primary"
+                        startIcon={<EditIcon />}
+                        onClick={() => handleEditOpen(s)}
+                      >
+                        Update
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        color="error"
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleDelete(s.id)}
+                      >
+                        Delete
+                      </Button>
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))
             )}
           </TableBody>
         </Table>
@@ -338,7 +321,7 @@ export default function ShowtimeDashboard() {
             <TextField
               label="Hall Name"
               name="hall_name"
-              value={editData?.hall_name || ""}
+              value={editData?.hall_name || ''}
               onChange={handleEditChange}
               fullWidth
             />
@@ -347,9 +330,7 @@ export default function ShowtimeDashboard() {
               name="start_time"
               type="datetime-local"
               value={
-                editData?.start_time
-                  ? new Date(editData.start_time).toISOString().slice(0, 16)
-                  : ""
+                editData?.start_time ? new Date(editData.start_time).toISOString().slice(0, 16) : ''
               }
               onChange={handleEditChange}
               fullWidth
@@ -359,7 +340,7 @@ export default function ShowtimeDashboard() {
               label="Total Seats"
               name="seats_total"
               type="number"
-              value={editData?.seats_total || ""}
+              value={editData?.seats_total || ''}
               onChange={handleEditChange}
               fullWidth
             />
@@ -367,7 +348,7 @@ export default function ShowtimeDashboard() {
               label="Available Seats"
               name="seats_available"
               type="number"
-              value={editData?.seats_available || ""}
+              value={editData?.seats_available || ''}
               onChange={handleEditChange}
               fullWidth
             />
@@ -375,7 +356,7 @@ export default function ShowtimeDashboard() {
               label="Price per Ticket (₹)"
               name="price_per_ticket"
               type="number"
-              value={editData?.price_per_ticket || ""}
+              value={editData?.price_per_ticket || ''}
               onChange={handleEditChange}
               fullWidth
             />
@@ -394,13 +375,13 @@ export default function ShowtimeDashboard() {
         open={snackbar.open}
         autoHideDuration={4000}
         onClose={() => setSnackbar({ ...snackbar, open: false })}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert
           onClose={() => setSnackbar({ ...snackbar, open: false })}
           severity={snackbar.severity}
           variant="filled"
-          sx={{ width: "100%" }}
+          sx={{ width: '100%' }}
         >
           {snackbar.message}
         </Alert>

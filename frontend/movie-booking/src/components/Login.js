@@ -25,7 +25,7 @@
 //       toast.error('Please enter both username and password.');
 //       return;
 //     }
-    
+
 //     try {
 //       const payload = { ...formData, is_admin: isAdmin };
 //       const response = await api.post('/login/', payload);
@@ -110,7 +110,7 @@ function Login() {
       toast.error('Please enter both username and password.');
       return;
     }
-    
+
     try {
       const response = await api.post('/login/', formData);
 
@@ -158,10 +158,7 @@ function Login() {
 
         {/* Forgot Password Button */}
         <Box className="mt-2 text-center">
-          <Button
-            color="secondary"
-            onClick={() => navigate('/forgot-password')}
-          >
+          <Button color="secondary" onClick={() => navigate('/forgot-password')}>
             Forgot Password?
           </Button>
         </Box>

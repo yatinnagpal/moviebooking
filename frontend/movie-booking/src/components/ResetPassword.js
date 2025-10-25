@@ -22,16 +22,13 @@ function ResetPassword() {
     e.preventDefault();
 
     if (formData.password !== formData.confirm_password) {
-      toast.error("Passwords do not match.");
+      toast.error('Passwords do not match.');
       return;
     }
 
     try {
       // ✅ Include both uidb64 and token in API endpoint
-      const response = await api.post(
-        `/reset-password/${uidb64}/${token}/`,
-        formData
-      );
+      const response = await api.post(`/reset-password/${uidb64}/${token}/`, formData);
 
       toast.success(response.data.message || 'Password reset successfully.');
       navigate('/login');
@@ -67,13 +64,7 @@ function ResetPassword() {
             margin="normal"
             required
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            className="mt-4"
-          >
+          <Button type="submit" variant="contained" color="primary" fullWidth className="mt-4">
             Reset Password
           </Button>
         </form>

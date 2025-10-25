@@ -35,13 +35,7 @@ function ForgotPassword() {
             margin="normal"
             required
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            className="mt-4"
-          >
+          <Button type="submit" variant="contained" color="primary" fullWidth className="mt-4">
             Send Reset Link
           </Button>
         </form>

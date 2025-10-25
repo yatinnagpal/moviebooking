@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('showtime_service', '0002_alter_showtime_seats_available_and_more'),
+        ("showtime_service", "0002_alter_showtime_seats_available_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='showtime',
-            name='seats_per_row',
+            model_name="showtime",
+            name="seats_per_row",
             field=models.PositiveIntegerField(default=10),
         ),
         migrations.AlterField(
-            model_name='showtime',
-            name='seats_available',
+            model_name="showtime",
+            name="seats_available",
             field=models.PositiveIntegerField(default=100),
         ),
         migrations.AlterField(
-            model_name='showtime',
-            name='seats_total',
+            model_name="showtime",
+            name="seats_total",
             field=models.PositiveIntegerField(default=100),
         ),
     ]

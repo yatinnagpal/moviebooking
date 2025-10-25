@@ -44,7 +44,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Clapperboard } from 'lucide-react';
 
-
 const Navbar = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -84,10 +83,7 @@ const Navbar = () => {
     <nav className="bg-blue-600 text-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo Section */}
-        <div
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={() => navigate('/')}
-        >
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
           <Clapperboard className="w-7 h-7 text-yellow-300" />
           <h2 className="text-2xl font-semibold tracking-wide hover:text-yellow-300 transition">
             Movie<span className="text-yellow-300">Booking</span>
@@ -96,10 +92,7 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="flex items-center gap-6">
-          <button
-            onClick={() => navigate('/')}
-            className="hover:text-yellow-300 transition"
-          >
+          <button onClick={() => navigate('/')} className="hover:text-yellow-300 transition">
             Home
           </button>
           {isLoggedIn && (

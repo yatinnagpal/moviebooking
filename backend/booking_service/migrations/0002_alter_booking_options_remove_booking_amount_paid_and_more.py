@@ -8,77 +8,100 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('booking_service', '0001_initial'),
-        ('showtime_service', '0001_initial'),
+        ("booking_service", "0001_initial"),
+        ("showtime_service", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='booking',
+            name="booking",
             options={},
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='amount_paid',
+            model_name="booking",
+            name="amount_paid",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='created_at',
+            model_name="booking",
+            name="created_at",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='movie_duration',
+            model_name="booking",
+            name="movie_duration",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='movie_genre',
+            model_name="booking",
+            name="movie_genre",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='movie_title',
+            model_name="booking",
+            name="movie_title",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='seats_booked',
+            model_name="booking",
+            name="seats_booked",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='show_start_time',
+            model_name="booking",
+            name="show_start_time",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='updated_at',
+            model_name="booking",
+            name="updated_at",
         ),
         migrations.AddField(
-            model_name='booking',
-            name='booked_at',
+            model_name="booking",
+            name="booked_at",
             field=models.DateTimeField(default=django.utils.timezone.now),
         ),
         migrations.AddField(
-            model_name='booking',
-            name='user_name',
-            field=models.CharField(default='Guest User', max_length=100),
+            model_name="booking",
+            name="user_name",
+            field=models.CharField(default="Guest User", max_length=100),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='booking',
-            name='status',
-            field=models.CharField(choices=[('pending', 'Pending'), ('confirmed', 'Confirmed'), ('cancelled', 'Cancelled')], default='pending', max_length=20),
+            model_name="booking",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("pending", "Pending"),
+                    ("confirmed", "Confirmed"),
+                    ("cancelled", "Cancelled"),
+                ],
+                default="pending",
+                max_length=20,
+            ),
         ),
         migrations.CreateModel(
-            name='Seat',
+            name="Seat",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('seat_number', models.CharField(max_length=10)),
-                ('is_booked', models.BooleanField(default=False)),
-                ('is_locked', models.BooleanField(default=False)),
-                ('locked_at', models.DateTimeField(blank=True, null=True)),
-                ('showtime', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='seats', to='showtime_service.showtime')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("seat_number", models.CharField(max_length=10)),
+                ("is_booked", models.BooleanField(default=False)),
+                ("is_locked", models.BooleanField(default=False)),
+                ("locked_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "showtime",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="seats",
+                        to="showtime_service.showtime",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='booking',
-            name='seats',
-            field=models.ManyToManyField(to='booking_service.seat'),
+            model_name="booking",
+            name="seats",
+            field=models.ManyToManyField(to="booking_service.seat"),
         ),
     ]

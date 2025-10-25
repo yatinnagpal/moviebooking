@@ -1,11 +1,11 @@
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+
 from showtime_service.views import ShowtimeViewSet
 
-
 router = DefaultRouter()
-router.register(r'showtimes', ShowtimeViewSet, basename='showtime')
+router.register(r"showtimes", ShowtimeViewSet, basename="showtime")
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]
