@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import MovieDashboard from './MovieDashboard';
+import BookingDashboard from './BookingDashboard';
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function AdminDashboard() {
         Go to User Homepage
       </Button>
       <MovieDashboard />
+      <BookingDashboard />
     </Box>
   );
 }

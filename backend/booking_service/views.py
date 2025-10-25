@@ -1,21 +1,10 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from .models import Booking, Seat
-from .serializers import BookingSerializer, SeatSerializer
+from .models import Booking
+from .serializers import BookingSerializer
 from django.utils import timezone
 from django.shortcuts import render
 from showtime_service.models import ShowTime
-
-
-class SeatsViewSet(viewsets.ModelViewSet):
-    serializer_class = SeatSerializer
-
-    def get_queryset(self):
-        queryset = Seat.objects.all()
-        showtime_id = self.request.query_params.get('showtime')
-        if showtime_id:
-            queryset = queryset.filter(showtime_id=showtime_id)
-        return queryset
 
 
 class BookingViewSet(viewsets.ModelViewSet):
