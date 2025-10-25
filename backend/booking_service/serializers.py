@@ -1,6 +1,8 @@
 from rest_framework import serializers
+
+
 from .models import Booking
-from showtime_service.models import ShowTime
+
 
 class BookingSerializer(serializers.ModelSerializer):
     # Nested showtime info
@@ -9,14 +11,14 @@ class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = [
-            'id',
-            'user_name',
-            'user_email',
-            'seats_booked',
-            'status',
-            'created_at',
-            'showtime',
-            'showtime_info',
+            "id",
+            "user_name",
+            "user_email",
+            "seats_booked",
+            "status",
+            "created_at",
+            "showtime",
+            "showtime_info",
         ]
 
     def get_showtime_info(self, obj):

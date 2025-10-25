@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Paper,
   Table,
@@ -14,9 +14,9 @@ import {
   Typography,
   Snackbar,
   Alert,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import API from "../api";
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import API from '../api';
 
 export default function BookingDashboard() {
   const [bookings, setBookings] = useState([]);
@@ -25,22 +25,22 @@ export default function BookingDashboard() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [snackbar, setSnackbar] = useState({
     open: false,
-    message: "",
-    severity: "success",
+    message: '',
+    severity: 'success',
   });
 
-  const showSnackbar = (message, severity = "success") => {
+  const showSnackbar = (message, severity = 'success') => {
     setSnackbar({ open: true, message, severity });
   };
 
   // ✅ Fetch bookings
   const fetchBookings = async () => {
     try {
-      const res = await API.get("/bookings/");
+      const res = await API.get('/bookings/');
       setBookings(res.data);
     } catch (error) {
-      console.error("Error fetching bookings:", error);
-      showSnackbar("Failed to fetch bookings!", "error");
+      console.error('Error fetching bookings:', error);
+      showSnackbar('Failed to fetch bookings!', 'error');
     } finally {
       setLoading(false);
     }
@@ -52,14 +52,14 @@ export default function BookingDashboard() {
 
   // ✅ Delete booking
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to cancel this booking?")) {
+    if (window.confirm('Are you sure you want to cancel this booking?')) {
       try {
         await API.delete(`/bookings/${id}/`);
         setBookings((prev) => prev.filter((b) => b.id !== id));
-        showSnackbar("Booking cancelled successfully!", "success");
+        showSnackbar('Booking cancelled successfully!', 'success');
       } catch (error) {
-        console.error("Error cancelling booking:", error);
-        showSnackbar("Failed to cancel booking!", "error");
+        console.error('Error cancelling booking:', error);
+        showSnackbar('Failed to cancel booking!', 'error');
       }
     }
   };
@@ -81,7 +81,7 @@ export default function BookingDashboard() {
     );
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden", mt: 4, p: 2 }}>
+    <Paper sx={{ width: '100%', overflow: 'hidden', mt: 4, p: 2 }}>
       <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
         🧾 Booking Dashboard
       </Typography>
@@ -109,38 +109,36 @@ export default function BookingDashboard() {
                 </TableCell>
               </TableRow>
             ) : (
-              bookings
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((b) => (
-                  <TableRow key={b.id} hover>
-                    <TableCell>{b.id}</TableCell>
-                    <TableCell>{b.user_name || b.user_email}</TableCell>
-<TableCell>{b.showtime_info.movie_title}</TableCell>
-<TableCell>{b.showtime_info.hall_name}</TableCell>
-<TableCell>
-  {new Date(b.showtime_info.start_time).toLocaleString("en-IN", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  })}
-</TableCell>
-<TableCell>{b.seats_booked}</TableCell>
-<TableCell>{b.seats_booked * b.showtime_info.price_per_ticket}</TableCell>
-                    <TableCell>{b.status}</TableCell>
-                    <TableCell align="center">
-                      <Stack direction="row" spacing={1} justifyContent="center">
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          size="small"
-                          startIcon={<DeleteIcon />}
-                          onClick={() => handleDelete(b.id)}
-                        >
-                          Cancel Booking
-                        </Button>
-                      </Stack>
-                    </TableCell>
-                  </TableRow>
-                ))
+              bookings.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((b) => (
+                <TableRow key={b.id} hover>
+                  <TableCell>{b.id}</TableCell>
+                  <TableCell>{b.user_name || b.user_email}</TableCell>
+                  <TableCell>{b.showtime_info.movie_title}</TableCell>
+                  <TableCell>{b.showtime_info.hall_name}</TableCell>
+                  <TableCell>
+                    {new Date(b.showtime_info.start_time).toLocaleString('en-IN', {
+                      dateStyle: 'medium',
+                      timeStyle: 'short',
+                    })}
+                  </TableCell>
+                  <TableCell>{b.seats_booked}</TableCell>
+                  <TableCell>{b.seats_booked * b.showtime_info.price_per_ticket}</TableCell>
+                  <TableCell>{b.status}</TableCell>
+                  <TableCell align="center">
+                    <Stack direction="row" spacing={1} justifyContent="center">
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        size="small"
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleDelete(b.id)}
+                      >
+                        Cancel Booking
+                      </Button>
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))
             )}
           </TableBody>
         </Table>
@@ -161,12 +159,12 @@ export default function BookingDashboard() {
         open={snackbar.open}
         autoHideDuration={3000}
         onClose={() => setSnackbar({ ...snackbar, open: false })}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert
           onClose={() => setSnackbar({ ...snackbar, open: false })}
           severity={snackbar.severity}
-          sx={{ width: "100%" }}
+          sx={{ width: '100%' }}
         >
           {snackbar.message}
         </Alert>

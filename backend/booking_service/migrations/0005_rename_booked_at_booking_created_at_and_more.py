@@ -6,22 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('booking_service', '0004_alter_seat_showtime'),
+        ("booking_service", "0004_alter_seat_showtime"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='booking',
-            old_name='booked_at',
-            new_name='created_at',
+            model_name="booking",
+            old_name="booked_at",
+            new_name="created_at",
         ),
         migrations.RemoveField(
-            model_name='booking',
-            name='seats',
+            model_name="booking",
+            name="seats",
         ),
         migrations.AddField(
-            model_name='booking',
-            name='seats_booked',
+            model_name="booking",
+            name="seats_booked",
             field=models.PositiveIntegerField(default=1),
         ),
     ]
