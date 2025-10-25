@@ -12,6 +12,7 @@ import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import SeatSelection from './pages/SeatSelection';
+import ShowtimeDashboard from './pages/ShowtimeDashboard';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:uidb64/:token" element={<ResetPassword />} />
         <Route path="/showtimes/:showtimeId/seats" element={<SeatSelection />} />
+        <Route path="/showtimes/:movieId" element={<ShowtimeDashboard />} />
         {/* <Route path="/" element={<h1>Welcome to Movie Ticket Booking App</h1>} /> */}
       </Routes>
     </Router>

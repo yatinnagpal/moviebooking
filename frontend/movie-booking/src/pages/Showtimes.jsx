@@ -17,7 +17,7 @@ export default function Showtimes() {
     let mounted=true;
     async function fetchShowtimes(){
       try{
-      const res = await API.get(`/showtimes/?movie=${id}`)
+      const res = await API.get(`/showtimes/?movie_id=${id}`)
       if (mounted) setShowtimes(res.data);
       const movieRes = await API.get(`/movies/${id}`)
       if (mounted) setMovieTitle(movieRes.data.title);
