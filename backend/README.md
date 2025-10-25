@@ -1,65 +1,86 @@
-# Backend — Django API (simple setup)
+🎬 Movie Booking Backend — Django REST API
 
-Prerequisites
+This is the backend service for the Movie Booking app, built using Django and Django REST Framework.
+It provides REST APIs for user authentication, movies, showtimes, and bookings.
 
-- Python 3.10+ (3.12 recommended)
-- git
+⚙️ Tech Stack
 
-1) Create and activate a virtual environment (recommended):
+Python 3.10 +
 
-```bash
-cd backend
+Django 5 +
+
+Django REST Framework
+
+SQLite (default DB)
+
+Virtualenv (recommended)
+
+📂 Project Structure
+backend/
+├── core/                # Django project settings and URLs
+├── userauth/            # Handles registration & login
+├── movie_service/       # Movies model and API endpoints
+├── showtime_service/    # Showtimes model and API endpoints
+├── booking_service/     # Bookings model and API endpoints
+├── api/                 # Unified API router
+├── manage.py
+└── requirements.txt
+
+🧩 Setup Instructions
+
+1️⃣ Clone Repo
+
+git clone https://github.com/yatinnagpal/moviebooking.git
+cd moviebooking/backend
+
+
+2️⃣ Create and Activate Virtual Env
+
 python3 -m venv .venv
-source .venv/bin/activate
-```
+source .venv/bin/activate      # Windows → .venv\Scripts\activate
 
-2) Install Python dependencies:
 
-```bash
-pip install --upgrade pip
+3️⃣ Install Dependencies
+
 pip install -r requirements.txt
-```
 
-3) Create the database and admin user:
 
-```bash
+4️⃣ Run Migrations
+
 python manage.py migrate
+
+
+5️⃣ Create Superuser
+
 python manage.py createsuperuser
-```
 
-4) Run the server:
 
-```bash
+6️⃣ Run Server
+
 python manage.py runserver
-```
 
-Open the API at http://127.0.0.1:8000/.
 
-Run tests:
+App runs at 👉 http://127.0.0.1:8000/
 
-```bash
+🧠 API Overview
+Endpoint	Method	Description
+/api/movies/	GET, POST	Fetch or add movies
+/api/showtimes/	GET, POST	View or create showtimes
+/api/bookings/	GET, POST	List or create bookings
+/api/register/	POST	Register user
+/api/login/	POST	Login user
+🧪 Run Tests
 python manage.py test
-```
 
-Simple lint/format commands (optional):
+⚠️ Troubleshooting
+Issue	Solution
+App not found	Add app name in INSTALLED_APPS
+Migration errors	Delete db.sqlite3 + __pycache__ → rerun migrations
+CORS error	Install and enable django-cors-headers
+💡 Tips
 
-```bash
-pip install black isort ruff flake8
-python -m isort .
-python -m black . --line-length 88
-python -m ruff check --fix --line-length 88 .
-python -m flake8 . --max-line-length=88 --exclude=migrations,tests,env,venv,.venv
-```
+Use .env for secrets (django-environ)
 
-Notes about `db.sqlite3` and `env/` (virtualenv):
+Add .venv and db.sqlite3 to .gitignore
 
-- The project uses SQLite by default; the file is `backend/db.sqlite3`.
-- If `backend/db.sqlite3` or `backend/env` were accidentally committed, stop tracking them (this does not delete the files locally):
-
-```bash
-# from repo root
-git rm --cached backend/db.sqlite3
-git rm -r --cached backend/env
-git commit -m "Stop tracking local artifacts: db.sqlite3 and env"
-git push
-```
+Switch to PostgreSQL in core/settings.py easily

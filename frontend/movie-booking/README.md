@@ -1,122 +1,83 @@
-# Frontend — movie-booking
+🎬 Movie Booking Frontend — React + Material UI
 
-This folder contains the React frontend for the Movie Booking app. Follow the steps below to run it locally on macOS (zsh).
-Supported on macOS (zsh). These instructions assume you have Node.js (>=16) and npm installed.
+Frontend of the Movie Booking app, built with React 18+ and Material UI v5.
+Users can browse movies, view showtimes and book tickets through a modern UI.
 
+⚙️ Tech Stack
 
-### Quick start
+React 18 +
 
-1) Install Node.js (v16+) and npm if you don't have them: https://nodejs.org/
+Material UI v5
 
-2) From the repository root run:
+Axios
 
-```bash
+React Router DOM
+
+Prettier + ESLint
+
+📂 Folder Structure
+frontend/movie-booking/
+├── src/
+│   ├── components/       # UI components
+│   ├── pages/            # Pages (Movies, Showtimes etc.)
+│   ├── api/              # Axios instance
+│   ├── config.js         # Backend API base URL
+│   ├── App.js
+│   └── index.js
+├── public/
+├── package.json
+└── README.md
+
+🧩 Setup Instructions
+
+1️⃣ Move to Frontend Folder
+
 cd frontend/movie-booking
+
+
+2️⃣ Install Dependencies
+
 npm install
-```
 
-3) Start the dev server:
 
-```bash
+3️⃣ Start Development Server
+
 npm start
-```
 
-Open http://localhost:3000 in your browser.
 
-### Build (production)
+App runs at 👉 http://localhost:3000
 
-```bash
-cd frontend/movie-booking
-npm run build
-```
+🔗 Backend Connection
 
-### Quick lint & format (optional)
+Default backend URL:
 
-```bash
-cd frontend/movie-booking
-# format files
-npx prettier --write "src/**/*.{js,jsx,css}"
-# try to auto-fix lintable issues
-npx eslint --fix "src/**/*.{js,jsx}" --ext .js,.jsx
-```
+http://127.0.0.1:8000/api/
 
-### Where to configure the backend URL
 
-Edit `src/config.js` and set the backend base URL (for example `http://localhost:8000/api`).
+To change, edit src/config.js:
 
-### Troubleshooting (common)
+export const API_BASE_URL = "http://localhost:8000/api";
 
-- If `npm start` fails with dependency errors, try `rm -rf node_modules package-lock.json && npm install`.
-- If ESLint flags `React must be in scope`, the project uses the new JSX transform; the included `.eslintrc.js` already disables that rule.
+🎯 Features
 
-That's it — the frontend should be running now.
-# Getting Started with Create React App
+✅ Browse and search movies
+✅ View showtimes by movie
+✅ Book tickets with dynamic form
+✅ Snackbar notifications for feedback
+✅ Responsive Material UI design
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+⚠️ Troubleshooting
+Issue	Fix
+App not starting	Delete node_modules → npm install again
+Backend not reachable	Update API_BASE_URL in config.js
+Snackbar not showing	Ensure component is mounted in parent
+Styling off	Restart dev server
+🌱 Future Enhancements
 
-## Available Scripts
+JWT auth (frontend login/register)
 
-In the project directory, you can run:
+Pagination and filters on movie list
 
-### `npm start`
+Seat selection UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dark mode support
