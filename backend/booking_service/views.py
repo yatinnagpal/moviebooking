@@ -7,6 +7,14 @@ from .models import Booking
 from .serializers import BookingSerializer
 
 
+
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
+from .serializers import BookingSummarySerializer
+from django.db.models import Count, F
+from django.db.models import Sum
+from .models import Booking
+
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
@@ -48,3 +56,27 @@ class BookingViewSet(viewsets.ModelViewSet):
         showtime.save(update_fields=["seats_available"])
 
         return Response(BookingSerializer(booking).data, status=status.HTTP_201_CREATED)
+
+class AdminBookingSummaryView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        """
+        Returns user-wise booking summary:
+        - total bookings (number of booking records)
+        - total seats booked
+        - total revenue
+        """
+        bookings = (
+            Booking.objects.filter(status="confirmed")
+            .values("user_name", "user_email")
+            .annotate(
+                total_bookings=Count('id'),
+                total_seats=Sum('seats_booked'),
+                total_revenue=Sum(F('seats_booked') * F('showtime__price_per_ticket'))
+            )
+            .order_by("user_name")
+        )
+
+        serializer = BookingSummarySerializer(bookings, many=True)
+        return Response(serializer.data)
