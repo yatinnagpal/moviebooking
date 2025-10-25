@@ -32,3 +32,11 @@ class BookingSerializer(serializers.ModelSerializer):
             "seats_available": st.seats_available,
             "price_per_ticket": st.price_per_ticket,
         }
+
+
+class BookingSummarySerializer(serializers.Serializer):
+    user_name = serializers.CharField()
+    user_email = serializers.EmailField()
+    total_bookings = serializers.IntegerField()
+    total_seats = serializers.IntegerField()
+    total_revenue = serializers.DecimalField(max_digits=10, decimal_places=2)
