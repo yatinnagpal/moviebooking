@@ -1,3 +1,55 @@
+# Frontend — movie-booking
+
+This folder contains the React frontend for the Movie Booking app. Follow the steps below to run it locally on macOS (zsh).
+Supported on macOS (zsh). These instructions assume you have Node.js (>=16) and npm installed.
+
+
+### Quick start
+
+1) Install Node.js (v16+) and npm if you don't have them: https://nodejs.org/
+
+2) From the repository root run:
+
+```bash
+cd frontend/movie-booking
+npm install
+```
+
+3) Start the dev server:
+
+```bash
+npm start
+```
+
+Open http://localhost:3000 in your browser.
+
+### Build (production)
+
+```bash
+cd frontend/movie-booking
+npm run build
+```
+
+### Quick lint & format (optional)
+
+```bash
+cd frontend/movie-booking
+# format files
+npx prettier --write "src/**/*.{js,jsx,css}"
+# try to auto-fix lintable issues
+npx eslint --fix "src/**/*.{js,jsx}" --ext .js,.jsx
+```
+
+### Where to configure the backend URL
+
+Edit `src/config.js` and set the backend base URL (for example `http://localhost:8000/api`).
+
+### Troubleshooting (common)
+
+- If `npm start` fails with dependency errors, try `rm -rf node_modules package-lock.json && npm install`.
+- If ESLint flags `React must be in scope`, the project uses the new JSX transform; the included `.eslintrc.js` already disables that rule.
+
+That's it — the frontend should be running now.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
