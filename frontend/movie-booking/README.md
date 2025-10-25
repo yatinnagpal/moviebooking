@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+🎬 Movie Booking Frontend — React + Material UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend of the Movie Booking app, built with React 18+ and Material UI v5.
+Users can browse movies, view showtimes and book tickets through a modern UI.
 
-## Available Scripts
+⚙️ Tech Stack
 
-In the project directory, you can run:
+React 18 +
 
-### `npm start`
+Material UI v5
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Axios
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+React Router DOM
 
-### `npm test`
+Prettier + ESLint
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📂 Folder Structure
+frontend/movie-booking/
+├── src/
+│   ├── components/       # UI components
+│   ├── pages/            # Pages (Movies, Showtimes etc.)
+│   ├── api/              # Axios instance
+│   ├── config.js         # Backend API base URL
+│   ├── App.js
+│   └── index.js
+├── public/
+├── package.json
+└── README.md
 
-### `npm run build`
+🧩 Setup Instructions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1️⃣ Move to Frontend Folder
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+cd frontend/movie-booking
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+2️⃣ Install Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3️⃣ Start Development Server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+npm start
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+App runs at 👉 http://localhost:3000
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+🔗 Backend Connection
 
-### Code Splitting
+Default backend URL:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+http://127.0.0.1:8000/api/
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To change, edit src/config.js:
 
-### Making a Progressive Web App
+export const API_BASE_URL = "http://localhost:8000/api";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🎯 Features
 
-### Advanced Configuration
+✅ Browse and search movies
+✅ View showtimes by movie
+✅ Book tickets with dynamic form
+✅ Snackbar notifications for feedback
+✅ Responsive Material UI design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+⚠️ Troubleshooting
+Issue	Fix
+App not starting	Delete node_modules → npm install again
+Backend not reachable	Update API_BASE_URL in config.js
+Snackbar not showing	Ensure component is mounted in parent
+Styling off	Restart dev server
+🌱 Future Enhancements
 
-### Deployment
+JWT auth (frontend login/register)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Pagination and filters on movie list
 
-### `npm run build` fails to minify
+Seat selection UI
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dark mode support

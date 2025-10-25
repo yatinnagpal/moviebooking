@@ -29,6 +29,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MovieDashboard from './MovieDashboard';
 import { BarChart } from '@mui/icons-material';
+import BookingDashboard from './BookingDashboard';
 
 function AdminDashboard() {
   const navigate = useNavigate();

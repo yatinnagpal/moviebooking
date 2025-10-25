@@ -28,10 +28,7 @@ const Navbar = () => {
 
         {/* Links */}
         <div className="flex items-center gap-6">
-          <button
-            onClick={() => navigate('/')}
-            className="hover:text-yellow-300 transition"
-          >
+          <button onClick={() => navigate('/')} className="hover:text-yellow-300 transition">
             Home
           </button>
 

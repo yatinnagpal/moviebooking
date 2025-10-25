@@ -9,23 +9,41 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('movie_service', '0001_initial'),
+        ("movie_service", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ShowTime',
+            name="ShowTime",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hall_name', models.CharField(max_length=100)),
-                ('start_time', models.DateTimeField()),
-                ('seats_total', models.PositiveIntegerField(default=100)),
-                ('seats_available', models.PositiveIntegerField(default=100)),
-                ('price_per_ticket', models.DecimalField(decimal_places=2, default=200.0, max_digits=10)),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='showtimes', to='movie_service.movie')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("hall_name", models.CharField(max_length=100)),
+                ("start_time", models.DateTimeField()),
+                ("seats_total", models.PositiveIntegerField(default=100)),
+                ("seats_available", models.PositiveIntegerField(default=100)),
+                (
+                    "price_per_ticket",
+                    models.DecimalField(decimal_places=2, default=200.0, max_digits=10),
+                ),
+                (
+                    "movie",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="showtimes",
+                        to="movie_service.movie",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['start_time'],
+                "ordering": ["start_time"],
             },
         ),
     ]
