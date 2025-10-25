@@ -1,143 +1,147 @@
-# Movie Booking — Fullstack App
+🎬 Movie Booking — Fullstack Web App
 
-Short summary
+A complete Movie Booking platform built with Django REST Framework (backend) and React + Material UI (frontend).
+Users can browse movies, view showtimes, and book tickets seamlessly.
 
-This repository contains a simple Movie Booking application with a Django REST API backend and a React frontend. It is organized as multiple small services/apps inside the `backend/` folder and a single React app in `frontend/movie-booking`.
+🚀 Features
+🎥 For Users
 
-Goal
+Browse all movies with details (poster, genre, duration, rating, description)
 
-Make it easy to run the full app locally for development, testing or demo purposes.
+Search movies by title
 
-What this repo contains (high level)
+View available showtimes for each movie
 
-- backend/ — Django project (API):
-  - `core/` — Django project settings & URLs
-  - `userauth/` — authentication (register, login, password reset)
-  - `movie_service/` — movie models & endpoints
-  - `showtime_service/` — showtime models & endpoints
-  - `booking_service/` — booking models & endpoints
-  - `api/` — (optional) API-level routing
-  - `env/` — (optional) a virtualenv that may exist locally (should be ignored by git)
+Book seats instantly via a sleek booking form
 
-- frontend/movie-booking — React app (UI)
+Get instant confirmation feedback via Snackbar alerts
 
-Prerequisites (basic)
+⚙️ For Admins
 
-- git
-- Python 3.10+ (3.12 recommended)
-- Node.js (v16+) and npm
+Add, update, or delete movies
 
-Quick setup — run the backend and frontend locally
+Create and manage showtimes per movie
 
-1) Clone the repo (if you haven't):
+View and manage bookings
 
-```bash
-git clone <your-repo-url>
-cd movie_booking
-```
+🧱 Tech Stack
+Layer	Technology
+Frontend	React, Material UI, Axios
+Backend	Django, Django REST Framework
+Database	SQLite (default)
+Other Tools	Virtualenv, npm, ESLint, Prettier
+📂 Project Structure
+moviebooking/
+│
+├── backend/                  # Django project
+│   ├── core/                 # Project settings and URLs
+│   ├── userauth/             # User authentication (register, login, password reset)
+│   ├── movie_service/        # Movie model and API
+│   ├── showtime_service/     # Showtime model and API
+│   ├── booking_service/      # Booking model and API
+│   ├── api/                  # API routing
+│   ├── manage.py
+│   └── requirements.txt
+│
+└── frontend/
+    └── movie-booking/        # React app
+        ├── src/
+        ├── public/
+        └── package.json
 
-2) Backend (Django)
+⚙️ Setup Instructions
+🧩 Prerequisites
 
-```bash
-cd backend
-# create a local venv (recommended name: .venv)
+Make sure you have installed:
+
+Python 3.10+ (recommended: 3.12)
+
+Node.js 16+ and npm
+
+Git
+
+🐍 Backend Setup (Django)
+# Clone the repository
+git clone https://github.com/yatinnagpal/moviebooking.git
+cd moviebooking/backend
+
+# Create virtual environment
 python3 -m venv .venv
-source .venv/bin/activate
-# install dependencies
+source .venv/bin/activate   # (Windows: .venv\Scripts\activate)
+
+# Install dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
-# apply DB migrations and create an admin user
+
+# Run migrations and create superuser
 python manage.py migrate
 python manage.py createsuperuser
-# start the API server
+
+# Start the backend server
 python manage.py runserver
-```
 
-The backend runs at http://127.0.0.1:8000/ by default.
 
-3) Frontend (React)
+Backend will start at 👉 http://127.0.0.1:8000/
 
-Open a new terminal and from the repo root:
+💻 Frontend Setup (React)
 
-```bash
+Open a new terminal:
+
 cd frontend/movie-booking
 npm install
 npm start
-```
 
-The frontend dev server runs at http://localhost:3000 and will connect to the backend API (edit `src/config.js` to change the backend base URL if needed).
 
-Commands summary
+Frontend will start at 👉 http://localhost:3000/
 
-- Start backend (terminal A):
+If the frontend can’t connect to the backend, update the API base URL inside:
+frontend/movie-booking/src/config.js
 
-```bash
-cd backend
-source .venv/bin/activate
-python manage.py runserver
-```
+🧪 Testing
 
-- Start frontend (terminal B):
+Run backend tests:
 
-```bash
-cd frontend/movie-booking
-npm start
-```
-
-Linting & formatting (optional)
-
-Backend (format + lint):
-
-```bash
-cd backend
-source .venv/bin/activate
-pip install black isort ruff flake8
-python -m isort .
-python -m black . --line-length 88
-python -m ruff check --fix --line-length 88 .
-python -m flake8 . --max-line-length=88 --exclude=migrations,tests,env,venv,.venv
-```
-
-Frontend (format + lint):
-
-```bash
-cd frontend/movie-booking
-npx prettier --write "src/**/*.{js,jsx,css}"
-npx eslint --fix "src/**/*.{js,jsx}" --ext .js,.jsx
-```
-
-Database file & virtualenv cleanup
-
-- If `backend/db.sqlite3` or `backend/env` are already tracked by git, remove them from tracking (this will not delete them from your disk):
-
-```bash
-# from repo root
-git rm --cached backend/db.sqlite3
-git rm -r --cached backend/env
-git commit -m "Stop tracking local artifacts: db.sqlite3 and env"
-git push
-```
-
-Tests
-
-- Backend unit tests (Django):
-
-```bash
 cd backend
 source .venv/bin/activate
 python manage.py test
-```
 
-Notes & troubleshooting
+🧹 Linting & Formatting
 
-- If the frontend cannot reach the backend, set the backend URL in `frontend/movie-booking/src/config.js`.
-- The repository includes formatting + lint configs for both frontend and backend; run the commands above to keep code consistent.
-- If you see ESLint or Flake8 errors coming from third-party packages (site-packages), those are probably from scanning your `env/` — make sure your virtualenv directory is excluded in lint checks and in `.gitignore`.
+Backend (Python):
 
-Next steps / optional improvements
+pip install black isort ruff flake8
+black . --line-length 88
+isort .
+ruff check --fix .
+flake8 . --max-line-length=88 --exclude=migrations,env,venv
 
-- Add `pre-commit` hooks (recommended) to run `black`, `isort`, `ruff`, and Prettier on changed files.
-- Use a `.env` file and `django-environ` for local secrets and email settings instead of editing `settings.py` directly.
-- If you want `db.sqlite3` removed from the repository history, I can help run BFG or `git filter-repo` (this rewrites history and requires force-push).
 
-If you'd like, I can commit this README and also run the git untracking commands for `db.sqlite3` and `backend/env` and push the changes. Tell me which you'd like me to do next.
+Frontend (JS/React):
+
+npx prettier --write "src/**/*.{js,jsx,css}"
+npx eslint --fix "src/**/*.{js,jsx}"
+
+🗃️ Git Ignore Cleanup
+
+If db.sqlite3 or backend/env got added to Git accidentally:
+
+git rm --cached backend/db.sqlite3
+git rm -r --cached backend/env
+git commit -m "Stop tracking local artifacts"
+git push
+
+🛠️ Troubleshooting
+Issue	Fix
+Backend not reachable from frontend	Check API URL in src/config.js
+Migration errors	Delete db.sqlite3 and __pycache__ folders, then rerun migrations
+Static files not loading	Run python manage.py collectstatic
+Snackbar not showing	Ensure MUI <Snackbar> is properly wrapped in parent container
+🌱 Future Improvements
+
+✅ JWT Authentication & Protected Routes
+
+✅ Better Admin Dashboard (React-based)
+
+🌐 Docker Compose setup
+
+📱 Responsive mobile-first redesign
