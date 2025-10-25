@@ -27,6 +27,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
 import API from "../api";
+import { Link } from 'react-router-dom';
 
 export default function MovieDashboard() {
   const [movies, setMovies] = useState([]);
@@ -188,6 +189,7 @@ export default function MovieDashboard() {
               <TableCell>Rating</TableCell>
               <TableCell>Description</TableCell>
               <TableCell align="center">Actions</TableCell>
+              <TableCell>Showtimes</TableCell>
             </TableRow>
           </TableHead>
 
@@ -253,6 +255,16 @@ export default function MovieDashboard() {
                           fullWidth
                         />
                       </TableCell>
+                      <TableCell align="center">
+  <Button
+    variant="text"
+    color="primary"
+    component={Link}
+    to={`/showtimes/${movie.id}`} // navigate to showtime page
+  >
+    View Showtimes
+  </Button>
+</TableCell>
                     </>
                   ) : (
                     <>
@@ -318,6 +330,16 @@ export default function MovieDashboard() {
                       </Stack>
                     )}
                   </TableCell>
+                  <TableCell align="center">
+  <Button
+    variant="text"
+    color="primary"
+    component={Link}
+    to={`/showtimes/${movie.id}`} // navigate to showtime page
+  >
+    View Showtimes
+  </Button>
+</TableCell>
                 </TableRow>
               ))}
           </TableBody>
