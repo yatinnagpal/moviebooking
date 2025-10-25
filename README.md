@@ -31,23 +31,7 @@ Backend	Django, Django REST Framework
 Database	SQLite (default)
 Other Tools	Virtualenv, npm, ESLint, Prettier
 📂 Project Structure
-moviebooking/
-│
-├── backend/                  # Django project
-│   ├── core/                 # Project settings and URLs
-│   ├── userauth/             # User authentication (register, login, password reset)
-│   ├── movie_service/        # Movie model and API
-│   ├── showtime_service/     # Showtime model and API
-│   ├── booking_service/      # Booking model and API
-│   ├── api/                  # API routing
-│   ├── manage.py
-│   └── requirements.txt
-│
-└── frontend/
-    └── movie-booking/        # React app
-        ├── src/
-        ├── public/
-        └── package.json
+![alt text](image.png)
 
 ⚙️ Setup Instructions
 🧩 Prerequisites
