@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.API_BASE_URL || 'https://moviebooking-15wj.onrender.com/',
+  baseURL: process.env.API_BASE_URL || 'https://moviebooking-15wj.onrender.com/api/',
   headers: { 'Content-Type': 'application/json' },
 });
 
