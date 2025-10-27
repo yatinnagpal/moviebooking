@@ -9,8 +9,8 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import MovieDashboard from './MovieDashboard';
+import API from '../api';
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function AdminDashboard() {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('accessToken');
-        const response = await axios.get('http://localhost:8000/api/admin/stats/', {
+        const response = await API.get('/admin/stats/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
