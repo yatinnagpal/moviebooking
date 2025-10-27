@@ -32,9 +32,18 @@ const Navbar = () => {
             Home
           </button>
 
-          {user && (
+        {user && user.is_admin && (
             <button
-              onClick={() => navigate('/bookings')}
+              onClick={() => navigate('/admin')}
+              className="hover:text-yellow-300 transition"
+            >
+              Dashboard
+            </button>
+          )}
+
+          {user && user.is_admin && (
+            <button
+              onClick={() => navigate('/admin/bookings')}
               className="hover:text-yellow-300 transition"
             >
               My Bookings
